@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" 
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+	<link rel="stylesheet" href="http://code.ionicframework.com/1.0.0/css/ionic.css" />
+	<script src="http://code.ionicframework.com/1.0.0/js/ionic.bundle.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<h:head>
+	<title>Itens</title>
+</h:head>
+	<h:body>
+		<table id="table-1">
+			<thead>
+				<tr>
+					<th>Item</th>
+					<th>Preço</th>
+					<th>Id</th>
+					<th>Descrição</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat value="#{itensController.itens}" var="item">
+					<tr>
+						<td>#{item.name}</td>
+						<td>#{item.gold}</td>
+						<td>#{item.id}</td>
+						<td><h:outputText value="#{item.description}" escape="false" /></td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+    </h:body>
+</body>
+</html>
