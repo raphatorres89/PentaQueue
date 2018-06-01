@@ -15,72 +15,54 @@
 
 	<title>Itens</title>
 </h:head>
-<h:body>
-	<div class="row">
-		<div class="col s2">
-			<ui:repeat value="#{itensController.itemList.tree}" var="tree">
-				<div class="col s12">
-					<h5>#{tree.header}</h5>
-					<ui:repeat value="#{tree.tags}" var="tag">
-						<p>
-							<label>
-								<input type="checkbox" /><span>#{tag}</span>
-							</label>
-						</p>
-					</ui:repeat>
-				</div>
-			</ui:repeat>
-		</div>
-	
-	
-		<div class="s10">
-			<table class="table responsive-table striped" id="table-1">
+	<h:body>
+		<div class="container">
+			<table class="table responsive-table" id="table-1">
 				<thead>
 					<tr>
-						<th>Na Loja</th>
 						<th>Item</th>
 						<th>Preço</th>
 						<th>Id</th>
 						<th>Descrição</th>
-						<th>Armadura</th>
-						<th>Vel de Ataque</th>
-						<th>Bloqueio</th>
-						<th>Chance de Crítico</th>
-						<th>Dano Crítico</th>
-						<th>Bônus de XP</th>
-						<th>Energia</th>
-						<th>Regeneração de Energia</th>
-						<th>HP</th>
-						<th>Regeneração de HP</th>
-						<th>MP</th>
-						<th>Regeneração de MP</th>
-						<th>Dano Mágico</th>
-						<th>Vel de Movimento</th>
-						<th>Dano Físico</th>
-						<th>Bloquei Mágico</th>
-						<th>% Armadura</th>
-						<th>% Vel de Ataque</th>
-						<th>% Bloqueio</th>
-						<th>% Chance de Crítico</th>
-						<th>% Dano Crítico</th>
-						<th>% Esquiva</th>
-						<th>% Bônus de XP</th>
-						<th>% HP</th>
-						<th>% Regeneração de HP</th>
-						<th>% Roubo de Vida</th>
-						<th>% MP</th>
-						<th>% Regeneração de MP</th>
-						<th>% Dano Mágico</th>
-						<th>% Vel de Movimento</th>
-						<th>% Dano Físico</th>
-						<th>% Bloqueio Mágico</th>
-						<th>% Absorção Mágica</th>
+						<th>flatArmorMod</th>
+						<th>flatAttackSpeedMod</th>
+						<th>flatBlockMod</th>
+						<th>flatCritChanceMod</th>
+						<th>flatCrithamageMod</th>
+						<th>flatEXPBonus</th>
+						<th>flatEnergyPoolMod</th>
+						<th>flatEnergyRegenMod</th>
+						<th>flatHPPoolMod</th>
+						<th>flatHPRegenMod</th>
+						<th>flatMPPoolMod</th>
+						<th>flatMPRegenMod</th>
+						<th>flatMagicDamageMod</th>
+						<th>flatMovementSpeedMod</th>
+						<th>flatPhysicalDamageMod</th>
+						<th>flatSpellBlockMod</th>
+						<th>percentArmorMod</th>
+						<th>percentAttackSpeedMod</th>
+						<th>percentBlockMod</th>
+						<th>percentCritChanceMod</th>
+						<th>percentCrithamageMod</th>
+						<th>percenthodgeMod</th>
+						<th>percentEXPBonus</th>
+						<th>percentHPPoolMod</th>
+						<th>percentHPRegenMod</th>
+						<th>percentLifeStealMod</th>
+						<th>percentMPPoolMod</th>
+						<th>percentMPRegenMod</th>
+						<th>percentMagicDamageMod</th>
+						<th>percentMovementSpeedMod</th>
+						<th>percentPhysicalDamageMod</th>
+						<th>percentSpellBlockMod</th>
+						<th>percentSpellVampMod</th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					<ui:repeat value="#{itensController.itens}" var="item">
 						<tr>
-							<td>#{item.inStore}</td>
 							<td>#{item.name}</td>
 							<td>#{item.gold}</td>
 							<td>#{item.id}</td>
@@ -121,41 +103,10 @@
 						</tr>
 					</ui:repeat>
 				</tbody>
-			</table>
+			</table>	
 		</div>
-	</div>
-	
-	<script>
-	$(function() {
-		  $('input[type="checkbox"]').change(function() {
-		    // We check if one or more checkboxes are selected
-		    // If one or more is selected, we perform filtering
-		    if($('input[type="checkbox"]:checked').length > 0) {
-		      // Get values all checked boxes
-		      var vals = $('input[type="checkbox"]:checked').map(function() {
-		        return this.value;
-		      }).get();
-
-		      // Here we do two things to table rows
-		      // 1. We hide all
-		      // 2. Then we filter, show those whose value in first td matches checkbox value
-		      $('table tr')
-		      .hide()    // 1
-		      .filter(function() {    // 2
-		        /* console.log($(this).find('td:first').text()); */
-		        
-		        return $(this).find('td:first').text().indexOf(vals) > -1;
-		        /* return vals.indexOf($(this).find('td:first').text()) > -1; */
-		      }).show();
-		    } else {
-		      // Show all
-		      $('table tr').show();
-		    }
-		  });
-		});
-	</script>
-	<!--JavaScript at end of body for optimized loading-->
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-</h:body>
+		<!--JavaScript at end of body for optimized loading-->
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+	</h:body>
 
 </html>

@@ -2,15 +2,21 @@ package com.pentaqueue.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.pentaqueue.factory.Api;
 
 import net.rithms.riot.api.RiotApiException;
+import net.rithms.riot.api.endpoints.static_data.constant.ItemListTags;
+import net.rithms.riot.api.endpoints.static_data.constant.Locale;
 import net.rithms.riot.api.endpoints.static_data.dto.Item;
 import net.rithms.riot.api.endpoints.static_data.dto.ItemList;
 import net.rithms.riot.constant.Platform;
@@ -27,16 +33,26 @@ public class ItensController implements Serializable {
 	@PostConstruct
 	public void init() {
 		try {
-			System.out.println("tentando");
-			itemList = Api.getRiotApi().getDataItemList(Platform.BR);
+			itemList = Api.getRiotApi().getDataItemList(Platform.BR,Locale.PT_BR, null, ItemListTags.ALL);
 
 			for (Map.Entry<String, Item> item : itemList.getData().entrySet()) {
 				itens.add(item.getValue());
 			}
-
 		} catch (RiotApiException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String listToString(List<String> lista) {
+		if (lista == null) {
+			return "";
+		}
+		return Arrays.toString(lista.toArray())
+				.toUpperCase()
+				.replace("[", "")
+				.replace(",", " ")
+				//.replace(" ", "")
+				.replace("]", "");
 	}
 
 	public ItemList getItemList() {
