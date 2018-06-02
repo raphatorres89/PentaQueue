@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<!-- Import materialize css -->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+	
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/mixitup.min.js"></script>
+
+	<title>Itens</title>
+	
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="row controls">
+			<div class="col s3">
+				<!-- <button type="button" class="control btn waves-effect waves-light" data-filter="all">Limpar</button> -->
+				
+				<ui:repeat value="#{itensController.itemList.tree}" var="tree">
+		      		<h6>#{tree.header}</h6>
+		      		<ui:repeat value="#{tree.tags}" var="tag">
+		      			<label>
+							<input type="checkbox" control="#{tag}" data-toggle=".#{tag}" />
+							<span>#{tag}</span><br/>
+						</label>
+		      		</ui:repeat>
+	      		</ui:repeat>
+			</div>
+			
+			<div class="col s9 container">
+				<table class="table responsive-table striped">
+					<thead>
+						<tr>
+							<th hidden="true">Tags</th>
+							<th id="item">Item</th>
+							<th id="gold">Preço</th>
+							<th>Descrição</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{itensController.itens}" var="item">
+							<tr class="mix #{itensController.listToString(item.tags)}">
+								<td hidden="true">#{itensController.listToString(item.tags)}</td>
+								<td>#{item.name}</td>
+								<td>#{item.gold}</td>
+								<td><h:outputText value="#{item.description}" escape="false" /></td>
+							</tr>
+						    <!-- <div class="mix #{itensController.listToString(item.tags)}">
+						    	#{itensController.listToString(item.tags)}
+						    </div> -->
+					  	</ui:repeat>
+				  	</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+        
+
+
+	<script>
+	    var containerEl = document.querySelector('.container');
+	    var mixer = mixitup(containerEl, {
+	        controls: {
+	            toggleLogic: 'and'
+	        }
+	    });
+
+
+
+	  //<![CDATA[
+	    $('th').click(function(){
+	        var table = $(this).parents('table').eq(0)
+	        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+	        this.asc = !this.asc
+	        if (!this.asc){rows = rows.reverse()}
+	        for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+	    })
+	    function comparer(index) {
+	        return function(a, b) {
+	            var valA = getCellValue(a, index), valB = getCellValue(b, index)
+	            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+	        }
+	    }
+	    function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+	  //]]>
+	</script>
+        
+    <!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+</h:body>
+
+</html>

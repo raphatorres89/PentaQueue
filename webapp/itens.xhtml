@@ -18,45 +18,88 @@
 	
 </h:head>
 <h:body>
-	<div class="row controls">
-		<div class="col s3">
-			<!-- <button type="button" class="control btn waves-effect waves-light" data-filter="all">Limpar</button> -->
+	<div class="container">
+		<div class="row">
+			<!-- primeiro div -->
+			<div class="col s12">
+				<!-- estrutura itens -->
+				<div class="col s9">
+					<!-- tags -->
+					<div class="col s4 controls">
+						<ui:repeat value="#{itensController.itemList.tree}" var="tree">
+				      		<h6>#{tree.header}</h6>
+				      		<ui:repeat value="#{tree.tags}" var="tag">
+				      			<label>
+									<input type="checkbox" control="#{tag}" data-toggle=".#{tag}" />
+									<span>#{tag}</span><br/>
+								</label>
+				      		</ui:repeat>
+			      		</ui:repeat>
+					</div>
+					
+					<!-- itens -->
+					<div class="col s8 container">
+						<!-- <table class="table responsive-table striped">
+							<thead>
+								<tr>
+									<th hidden="true">Tags</th>
+									<th id="item">Item</th>
+									<th id="gold">Preço</th>
+									<th>Descrição</th>
+								</tr>
+							</thead>
+							<tbody> -->
+								<ui:repeat value="#{itensController.itens}" var="item">
+									<div class="col s3">
+										<div class="card mix #{itensController.listToString(item.tags)}">
+											<div class="card-image waves-effect waves-block waves-light">
+												<img class="activator" 
+													src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/#{item.image.full}" />
+											</div>
+											<div class="card-content">
+												<span class="card-title activator grey-text text-darken-4">
+													#{item.name}
+												</span>
+												<p><a href="#">#{item.gold}</a></p>
+											</div>
+											<div class="card-reveal">
+												<span class="card-title grey-text text-darken-4">#{item.name}<i
+													class="material-icons right">close</i></span>
+												<p><h:outputText value="#{item.description}" escape="false" /></p>
+											</div>
+										</div>
+									</div>
+
+									<!-- <tr class="mix #{itensController.listToString(item.tags)}">
+										<td hidden="true">#{itensController.listToString(item.tags)}</td>
+										<td>#{item.name}</td>
+										<td>#{item.gold}</td>
+										<td><h:outputText value="#{item.description}" escape="false" /></td>
+									</tr> -->
+							  	</ui:repeat>
+						  	<!-- </tbody>
+						</table> -->
+					</div>
+					
+					<div class="col s3">
+						descricao
+					</div>
+				</div>
+				
+				<!-- segunda coluna -->
+				<div class="col s3">
+					<div class="col s12">
+						descrição
+					</div>
+					<div class="col s12">
+						itens
+					</div>
+				</div>
+			</div>
 			
-			<ui:repeat value="#{itensController.itemList.tree}" var="tree">
-	      		<h6>#{tree.header}</h6>
-	      		<ui:repeat value="#{tree.tags}" var="tag">
-	      			<label>
-						<input type="checkbox" control="#{tag}" data-toggle=".#{tag}" />
-						<span>#{tag}</span><br/>
-					</label>
-	      		</ui:repeat>
-      		</ui:repeat>
-		</div>
-		
-		<div class="col s9 container">
-			<table class="table responsive-table striped">
-				<thead>
-					<tr>
-						<th hidden="true">Tags</th>
-						<th id="item">Item</th>
-						<th id="gold">Preço</th>
-						<th>Descrição</th>
-					</tr>
-				</thead>
-				<tbody>
-					<ui:repeat value="#{itensController.itens}" var="item">
-						<tr class="mix #{itensController.listToString(item.tags)}">
-							<td hidden="true">#{itensController.listToString(item.tags)}</td>
-							<td>#{item.name}</td>
-							<td>#{item.gold}</td>
-							<td><h:outputText value="#{item.description}" escape="false" /></td>
-						</tr>
-					    <!-- <div class="mix #{itensController.listToString(item.tags)}">
-					    	#{itensController.listToString(item.tags)}
-					    </div> -->
-				  	</ui:repeat>
-			  	</tbody>
-			</table>
+			<div class="col s9 ">
+				
+			</div>
 		</div>
 	</div>
 
