@@ -10,9 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.pentaqueue.factory.Api;
+import com.pentaqueue.util.NameUtil;
 
 import net.rithms.riot.api.RiotApiException;
 import net.rithms.riot.api.endpoints.static_data.constant.ItemListTags;
@@ -53,6 +52,10 @@ public class ItensController implements Serializable {
 				.replace(",", " ")
 				//.replace(" ", "")
 				.replace("]", "");
+	}
+	
+	public String normalizarNome(String nome) {
+		return NameUtil.normalizaNome(nome);
 	}
 
 	public ItemList getItemList() {

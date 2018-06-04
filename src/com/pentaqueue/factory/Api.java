@@ -7,7 +7,7 @@ import net.rithms.riot.api.RiotApi;
 
 public class Api {
 
-	private static final String API_KEY = "RGAPI-8f56e520-3735-4b46-abd5-6f265b1d9d26";
+	private static final String API_KEY = "RGAPI-2dfeaf3c-0c03-4cb6-acab-0c412424b2e5";
 	
 	public static RiotApi getRiotApi() {
 		ApiConfig config = new ApiConfig().setDebugLevel(Level.FINEST).setKey(API_KEY);

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+	<!-- Import materialize css -->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+	
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/mixitup.min.js"></script>
+
+	<title>Itens</title>
+	
+</head>
+<body>
+	<div class="row">
+		<!-- primeiro div -->
+		<div class="col s12 grey" style="max-width: 1024px">
+			<!-- tags -->
+			<div class="col s2 controls blue">
+				<ui:repeat value="#{itensController.itemList.tree}" var="tree">
+		      		<h6>#{tree.header}</h6>
+		      		<ui:repeat value="#{tree.tags}" var="tag">
+		      			<label>
+							<input type="checkbox" control="#{tag}" data-toggle=".#{tag}" />
+							<span>#{tag}</span><br/>
+							<input type="checkbox" control="#{tag}" data-toggle=".#{tag}" />
+							<span>#{tag}</span><br/>
+							<input type="checkbox" control="#{tag}" data-toggle=".#{tag}" />
+							<span>#{tag}</span><br/>
+							<input type="checkbox" control="#{tag}" data-toggle=".#{tag}" />
+							<span>#{tag}</span><br/>
+						</label>
+		      		</ui:repeat>
+	      		</ui:repeat>
+			</div>
+			
+			<!-- itens -->
+			<div class="col s6 container">
+				<ui:repeat value="#{itensController.itens}" var="item">
+					<div class="col s6">
+						<div class="card mix #{itensController.listToString(item.tags)}" style="max-width:210px; max-height: 100px">
+							<div class="col s4 card-content">
+								<img class="" 
+									src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/#{item.image.full}" />
+							</div>
+							<div class="card-content">
+								<span class="grey-text text-darken-4">
+									#{item.name}
+								</span>
+								<p><a href="#">#{item.gold}</a></p>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title grey-text text-darken-4">#{item.name}<i
+									class="material-icons right">close</i></span>
+								<p><h:outputText value="#{item.description}" escape="false" /></p>
+							</div>
+						</div>
+					</div>
+					<div class="col s6">
+						<div class="card mix #{itensController.listToString(item.tags)}">
+							<div class="col s4 card-content">
+								<img class="" src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/#{item.image.full}" />
+							</div>
+							<div class="card-content">
+								<span class="grey-text text-darken-4">
+									#{item.name}
+								</span>
+								<p><a href="#">#{item.gold}</a></p>
+							</div>
+							<div class="card-reveal">
+								<span class="card-title grey-text text-darken-4">#{item.name}<i
+									class="material-icons right">close</i></span>
+								<p><h:outputText value="#{item.description}" escape="false" /></p>
+							</div>
+						</div>
+					</div>
+		  		</ui:repeat>
+			</div>
+			
+			<!-- segunda coluna -->
+			<div class="col s4 blue">
+				<div class="col s12">
+					<img class="" 
+						src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/#{item.image.full}" />
+				</div>
+				<div class="col s12">
+					descrição
+				</div>
+				<div class="col s12">
+					itens
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+        
+
+
+	<script>
+	    var containerEl = document.querySelector('.container');
+	    var mixer = mixitup(containerEl, {
+	        controls: {
+	            toggleLogic: 'and'
+	        }
+	    });
+
+
+
+	  //<![CDATA[
+	    $('th').click(function(){
+	        var table = $(this).parents('table').eq(0)
+	        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+	        this.asc = !this.asc
+	        if (!this.asc){rows = rows.reverse()}
+	        for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+	    })
+	    function comparer(index) {
+	        return function(a, b) {
+	            var valA = getCellValue(a, index), valB = getCellValue(b, index)
+	            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+	        }
+	    }
+	    function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+	  //]]>
+	</script>
+        
+    <!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>
